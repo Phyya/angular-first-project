@@ -1,0 +1,21 @@
+<div class="dashboard">
+  <div class="sidebar">
+    <ul class="nav-links">
+      <li>
+        <a routerLink="/login" routerLinkActive="active">Home</a>
+      </li>
+      <li>
+        <a routerLink="/savestar" routerLinkActive="active">About</a>
+      </li>
+      <li>
+        <a routerLink="/login" routerLinkActive="active">Services</a>
+      </li>
+      <li>
+        <a routerLink="/dashboard" routerLinkActive="active">Contact</a>
+      </li>
+    </ul>
+  </div>
+  <div class="content">
+    <router-outlet>Welcome {{ username }}</router-outlet>
+  </div>
+</div>

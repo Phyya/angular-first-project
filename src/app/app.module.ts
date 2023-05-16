@@ -9,9 +9,16 @@ import { ClientsComponent } from './pages/clients/clients.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './pages/login/login.component';
 import { SavestarComponent } from './pages/savestar/savestar.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 @NgModule({
-  declarations: [AppComponent, ClientsComponent, LoginComponent, SavestarComponent],
+  declarations: [
+    AppComponent,
+    ClientsComponent,
+    LoginComponent,
+    SavestarComponent,
+    DashboardComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

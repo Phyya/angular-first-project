@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DataService } from 'src/app/shared/data/data.service';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   username: string;
   password: string;
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private dataService: DataService
+  ) {
     this.username = '';
     this.password = '';
   }
@@ -19,13 +24,14 @@ export class LoginComponent implements OnInit {
       this.username = params.get('username') ?? '';
       this.password = params.get('password') ?? '';
     });
+    if (this.username && this.password) {
+      const user = { username: this.username };
+      this.dataService.setUserData(user);
+      this.router.navigate(['/dashboard']);
+    }
   }
 
   login() {
-    // Add your login logic here
-    console.log('Username:', this.username);
-    console.log('Password:', this.password);
-
-    this.router.navigate(['/savestar']); // Replace '/another-path' with the desired path
+    this.router.navigate(['/dashboard']);
   }
 }
