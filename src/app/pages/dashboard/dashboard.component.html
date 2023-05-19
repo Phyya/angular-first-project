@@ -2,20 +2,86 @@
   <div class="sidebar">
     <ul class="nav-links">
       <li>
-        <a routerLink="/login" routerLinkActive="active">Home</a>
+        <a routerLink="/login" routerLinkActive="active">
+          <i class="fa-solid fa-house-chimney"></i>
+          Home</a
+        >
       </li>
       <li>
-        <a routerLink="/savestar" routerLinkActive="active">About</a>
+        <a routerLink="/savestar" routerLinkActive="active">
+          <!-- <i class="fa-regular fa-bullseye-arrow"></i>
+          <i class="fa-regular fa-bullseye-pointer"></i>
+          <i class="fa-thin fa-bullseye-arrow"></i>
+          <i class="fa-duotone fa-bullseye-arrow"></i>
+          <i class="fa-sharp fa-light fa-bullseye-arrow"></i>
+          <i class="fa-sharp fa-regular fa-bullseye"></i> -->
+          <i class="fa-light fa-bullseye-pointer"></i>
+          <i class="fa-sharp fa-light fa-bullseye-pointer"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+            <path
+              d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256-96a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"
+            />
+          </svg>
+          Target</a
+        >
       </li>
       <li>
-        <a routerLink="/login" routerLinkActive="active">Services</a>
+        <a routerLink="/login" routerLinkActive="active">
+          <i class="fa-sharp fa-solid fa-coins"></i>
+          Loans</a
+        >
       </li>
       <li>
-        <a routerLink="/dashboard" routerLinkActive="active">Contact</a>
+        <a routerLink="/dashboard" routerLinkActive="active">
+          <i class="fa-solid fa-user"></i>
+          Profile</a
+        >
       </li>
     </ul>
   </div>
   <div class="content">
-    <router-outlet>Welcome {{ username }}</router-outlet>
+    <router-outlet>
+      <app-header [title]="'Overview'"></app-header>
+      <div class="dashboard_container">
+        <div class="dashboard_left_container">
+          <app-balance></app-balance>
+          <h1 class="dashboard_heading">Savings & Loans</h1>
+          <div class="dashboard_products">
+            <div class="dashboard_products_s">
+              <p>Spend2Save</p>
+              <p>
+                Worried you spend a lot and save nothing? Worry no more, as you
+                can now save as much as you spend.
+              </p>
+            </div>
+            <div class="dashboard_products_f">
+              <p>FixSave</p>
+              <p>
+                Hey, want to save towards a goal? Choose ‘Fixed Savings’ now and
+                save any amount of your choice daily, weekly, monthly and more.
+              </p>
+            </div>
+            <div class="dashboard_products_p">
+              <p>PercentWise</p>
+              <p>
+                Build up your savings by allocating a percentage of your
+                earnings daily, weekly, or monthly. 
+              </p>
+            </div>
+            <div class="dashboard_products_c">
+              <p>CashBack Loans</p>
+              <p>
+                Say Hello to Cash Back and Goodbye to Financial Worries - Get a
+                Cash Back Loan!
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="dashboard_right_container">
+          <app-schedule-savings></app-schedule-savings>
+        </div>
+      </div>
+    </router-outlet>
   </div>
 </div>

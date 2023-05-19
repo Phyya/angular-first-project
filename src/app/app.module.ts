@@ -10,6 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './pages/login/login.component';
 import { SavestarComponent } from './pages/savestar/savestar.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { BalanceComponent } from './components/balance/balance.component';
+import { ScheduleSavingsComponent } from './components/schedule-savings/schedule-savings.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,9 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     LoginComponent,
     SavestarComponent,
     DashboardComponent,
+    BalanceComponent,
+    ScheduleSavingsComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
