@@ -27,11 +27,11 @@ export class LoginComponent implements OnInit {
     if (this.username && this.password) {
       const user = { username: this.username };
       this.dataService.setUserData(user);
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/home']);
     }
   }
 
   login() {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/home']);
   }
 }
