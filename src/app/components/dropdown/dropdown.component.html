@@ -1,0 +1,20 @@
+<div class="dropdown">
+  <select [(ngModel)]="selectedOption" (change)="onSelect($event)">
+    <option value="" disabled>Select an option</option>
+    <option *ngFor="let option of options" [value]="option">
+      {{ option }}
+    </option>
+  </select>
+</div>
+
+<div class="custom-select">
+  <div class="select-header">
+    <span class="selected-option">{{ selectedOption }}</span>
+    <span class="arrow">Hiii</span>
+  </div>
+  <ul class="options-list">
+    <li *ngFor="let option of options" (change)="onSelect($event)">
+      {{ option }}
+    </li>
+  </ul>
+</div>

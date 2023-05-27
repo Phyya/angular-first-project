@@ -1,0 +1,43 @@
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+
+.dropdown select {
+  border: none;
+  outline: none;
+  border: 1px solid #fff;
+  border-radius: 8px;
+  padding: 12px 10px;
+  background-color: transparent;
+}
+select {
+  /* Custom background color */
+  background-color: #f2f2f2;
+
+  /* Custom font color */
+  color: #333;
+
+  /* Custom padding and border */
+  padding: 10px;
+  border: 1px solid #ccc;
+
+  /* Custom font size and style */
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+
+  /* Custom cursor style */
+  cursor: pointer;
+}
+
+/* Custom hover effect */
+select:hover {
+  background-color: #e6e6e6;
+}
+
+/* Custom focus effect */
+select:focus {
+  outline: none;
+  box-shadow: 0 0 2px 1px #999;
+}

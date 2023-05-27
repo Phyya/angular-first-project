@@ -1,6 +1,15 @@
 .balance_overview {
   background-color: #1e40af;
   color: white;
-  padding: 15px;
+  padding: 20px 15px;
   border-radius: 10px;
+}
+.balance_overview div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.balance_greeting {
+  font-size: 20px;
 }

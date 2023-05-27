@@ -1,26 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ClientsComponent } from './pages/clients/clients.component';
+import { LayoutComponent } from './components/layout/layout.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { LoginComponent } from './pages/login/login.component';
+import { ProductpageComponent } from './pages/productpage/productpage.component';
 import { SavestarComponent } from './pages/savestar/savestar.component';
 
 const routes: Routes = [
   {
-    path: 'clients',
-    component: ClientsComponent,
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-  },
-  {
-    path: 'savestar',
-    component: SavestarComponent,
+    path: '',
+    component: LayoutComponent,
+    children: [
+      { path: 'home', component: DashboardComponent },
+      { path: 'my-savings', component: SavestarComponent },
+      { path: 'home/:identifier', component: ProductpageComponent },
+      { path: 'loans/:identifier', component: ProductpageComponent },
+    ],
   },
 ];
 

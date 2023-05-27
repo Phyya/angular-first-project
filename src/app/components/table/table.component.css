@@ -1,0 +1,31 @@
+table {
+  width: 100%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+tr {
+  box-shadow: 1px 1px 1px lightgray;
+  padding: 10px 0;
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+}
+tr:hover {
+  background-color: #02b1ee;
+  color: #fff;
+}
+thead tr {
+  background-color: transparent;
+  color: #000;
+}
+
+th {
+  border-top: 1px solid #003399;
+  border-bottom: 1px solid #003399;
+  text-align: center;
+  padding: 8px;
+}
+td {
+  padding: 20px 0;
+  text-align: center;
+}

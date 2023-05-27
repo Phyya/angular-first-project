@@ -1,1 +1,28 @@
-<p>schedule-savings works!</p>
+<div class="scheduledSavings_container">
+  <div class="scheduledSavings_savings">
+    <div class="scheduled-header">Scheduled savings</div>
+
+    <ul>
+      <li *ngFor="let item of dataSource" class="scheduled_list">
+        <div class="scheduled_list_heading">
+          <p>
+            {{ item.name }}
+          </p>
+
+          <p>₦ {{ item.amount }}</p>
+        </div>
+        <p>
+          {{ item.date.toDateString().slice(0, 20) }}
+        </p>
+      </li>
+    </ul>
+    <div class="scheduled_features">
+      <div><i class="fa-solid fa-ban"></i> Missed</div>
+      <div><i class="fa-solid fa-clock-rotate-left"></i>View History</div>
+    </div>
+  </div>
+  <li>
+    Your Scheduled Savings are subject to change if you have a Spend ‘2’ Save
+    plan ongoing.
+  </li>
+</div>

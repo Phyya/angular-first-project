@@ -1,0 +1,11 @@
+.product_form_container {
+  display: flex;
+  border: 2px solid green;
+  height: 100%;
+}
+.product_form_container > div {
+  flex: 1;
+}
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: transparent !important;
+}

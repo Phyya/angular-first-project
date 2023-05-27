@@ -1,0 +1,10 @@
+<div class="modal" (click)="closeModal()">
+  <div
+    class="modal-content"
+    [style.background-color]="backgroundColor"
+    [style.color]="color"
+    (click)="preventClose($event)"
+  >
+    <ng-content></ng-content>
+  </div>
+</div>

@@ -1,1 +1,79 @@
-<p>savestar works!</p>
+<div class="my_savings_container">
+  <app-header [title]="'My Savings'"></app-header>
+
+  <div class="total_savings">
+    <p>Total Savings</p>
+    <p class="total_savings_actual">
+      {{ totalSavings }}
+    </p>
+  </div>
+  <div class="user_target_container">
+    <div
+      *ngFor="let item of userTargets"
+      class="user_target_box"
+      (click)="openModal(item.id)"
+    >
+      <p>{{ item.name }}</p>
+      <p>₦{{ item.amount }}</p>
+      <div class="user_progress">
+        <div class="user_progress_bar">
+          <app-bar [value]="calculateProgress(item)"></app-bar>
+          <p>{{ calculateProgress(item) }}%</p>
+        </div>
+        <div class="user_target_category">{{ item.category }}</div>
+      </div>
+    </div>
+    <app-modal
+      *ngIf="isModalVisible"
+      (onClose)="closeModal()"
+      [backgroundColor]="'#fff'"
+      [color]="'#000'"
+    >
+      <div class="user_active_summary_header">
+        <div>
+          <p>{{ activeSavings.name }}</p>
+          <p class="user_active_amount">₦{{ activeSavings.amount }}</p>
+        </div>
+        <div class="user_target_category_active">
+          {{ activeSavings.category }}
+        </div>
+      </div>
+      <div class="user_active_summary_header">
+        <div>
+          <p>Interest Payout</p>
+          <p>₦6,300.00</p>
+        </div>
+        <div>
+          <p>Interest Earned</p>
+          <p>₦6,300.00</p>
+        </div>
+      </div>
+      <div class="user_active_recent">
+        <p>Recent Activities</p>
+        <div
+          *ngFor="let item of tableData"
+          class="user_category_history_listitem"
+        >
+          {{ item.description }}
+        </div>
+        <div
+          *ngFor="let item of tableData"
+          class="user_category_history_listitem"
+        >
+          {{ item.description }}
+        </div>
+        <div
+          *ngFor="let item of tableData"
+          class="user_category_history_listitem"
+        >
+          {{ item.description }}
+        </div>
+      </div>
+    </app-modal>
+  </div>
+  <div class="user_history_table">
+    <h2>Recent History</h2>
+    <app-table [columns]="tableColumns" [data]="tableData"></app-table>
+    <button class="user_history_viewmore">View more activities</button>
+  </div>
+</div>

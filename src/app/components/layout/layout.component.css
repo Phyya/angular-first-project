@@ -1,0 +1,79 @@
+.layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 220px;
+  background-color: #1e40af;
+  padding: 20px 0;
+}
+
+.nav-links {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links li {
+  margin-bottom: 10px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+  width: 100%;
+  margin: 20px 0;
+  padding: 20px;
+  gap: 2rem;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+.nav-links li a svg {
+  width: 17px;
+  fill: white;
+  margin-left: -2px;
+}
+
+.nav-links li a.active {
+  font-weight: bold;
+}
+.nav-links li a:hover,
+.nav-links li a.active {
+  background-color: #fff;
+  color: #1e40af;
+  fill: #1e40af;
+  font-weight: bold;
+}
+.nav-links li a.active svg {
+  fill: #1e40af;
+}
+.nav-links li a:hover svg {
+  fill: #1e40af;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.sidebar_header {
+  display: flex;
+  width: 100%;
+  color: #fff;
+  padding: 20px;
+  gap: 2rem;
+  font-family: "Racing Sans One", cursive;
+}
+@media screen and (max-width: 768px) {
+  .content {
+    padding: 0;
+    background-image: url("../../../assets/images/money_patter.svg");
+  }
+}

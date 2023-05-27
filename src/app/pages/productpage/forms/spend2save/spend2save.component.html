@@ -1,0 +1,37 @@
+<app-modal
+  *ngIf="openForm"
+  (onClose)="closeModal()"
+  [backgroundColor]="'#003399'"
+  [color]="'#000'"
+>
+  <h3>Create your plan</h3>
+  <div class="product_form_container">
+    <div>
+      Left
+
+      <app-custom-input
+        label="Title"
+        [value]="' '"
+        placeholder="Enter the name of your plan"
+      ></app-custom-input>
+      <app-custom-input
+        label="Description"
+        [value]="' '"
+        placeholder="Enter a brief description"
+      ></app-custom-input>
+
+      <div style="margin-top: 20px">
+        <label>Mode</label>
+        <mat-form-field>
+          <mat-label>Select Option</mat-label>
+          <mat-select>
+            <mat-option value="option1">Option 1</mat-option>
+            <mat-option value="option2">Option 1</mat-option>
+            <mat-option value="option3">Option 1</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div>Right</div>
+  </div>
+</app-modal>

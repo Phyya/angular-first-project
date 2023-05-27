@@ -1,0 +1,59 @@
+<div>
+  <app-header [title]="activePage.title"></app-header>
+  <div>
+    <div class="user_products_header">
+      <div class="user_products_header_details">
+        <p>
+          {{ activePage.title }}
+        </p>
+        <p>{{ activePage.description }}</p>
+        <img
+          [src]="activePage.imagePath"
+          [alt]="activePage.title"
+          class="user_products_img"
+        />
+      </div>
+    </div>
+    <div class="user_products_history">
+      <ul class="user_products_tab">
+        <li
+          [class.tab_active]="activeTab === 'active'"
+          (click)="setActiveTab('active')"
+        >
+          Active
+        </li>
+        <li
+          [class.tab_active]="activeTab === 'past'"
+          (click)="setActiveTab('past')"
+        >
+          Past
+        </li>
+      </ul>
+
+      <div class="user_products_history_list" *ngIf="activeTab === 'active'">
+        <div *ngFor="let item of activePage.activeSavings">
+          <p>{{ item.name }}</p>
+          <p>{{ item.amount }}</p>
+        </div>
+      </div>
+      <div class="user_products_history_list" *ngIf="activeTab === 'past'">
+        <div *ngFor="let item of activePage.pastSavings">
+          <p>{{ item.name }}</p>
+          <p>{{ item.amount }}</p>
+        </div>
+      </div>
+      <div class="user_products_action_container">
+        <button
+          class="user_products_create"
+          (click)="openModal(activePage.identifier)"
+        >
+          <i class="fa-solid fa-circle-plus"></i>Create New
+        </button>
+      </div>
+    </div>
+  </div>
+  <app-spend2save
+    [openForm]="forms['spend2save']"
+    (onClose)="toggleModal('spend2save')"
+  ></app-spend2save>
+</div>

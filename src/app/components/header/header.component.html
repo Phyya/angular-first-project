@@ -1,7 +1,16 @@
-<p>{{ title }}</p>
-<div>
-  <mat-icon [svgIcon]="doneIcon"></mat-icon>
-  <mat-icon>{{ doneIcon }}</mat-icon>
-  <mat-icon>{{ calendarIcon }}</mat-icon>
-  <i class="fas fa-check"></i>
+<div class="header_header">
+  <h1 class="header_header_title">{{ title }}</h1>
+  <div class="header_details">
+    <div>
+      <mat-icon [svgIcon]="doneIcon"></mat-icon>
+      <i class="fa-solid fa-calendar-days"></i>
+      <p>Wednesday 17th May, 2023</p>
+    </div>
+    <div>
+      <i class="fa-solid fa-user"></i>
+      <i class="fa-sharp fa-solid fa-bell"></i>
+    </div>
+  </div>
 </div>
+
+<div></div>
