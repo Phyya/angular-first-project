@@ -1,6 +1,5 @@
+<app-header [title]="'My Savings'"></app-header>
 <div class="my_savings_container">
-  <app-header [title]="'My Savings'"></app-header>
-
   <div class="total_savings">
     <p>Total Savings</p>
     <p class="total_savings_actual">
@@ -18,7 +17,6 @@
       <div class="user_progress">
         <div class="user_progress_bar">
           <app-bar [value]="calculateProgress(item)"></app-bar>
-          <p>{{ calculateProgress(item) }}%</p>
         </div>
         <div class="user_target_category">{{ item.category }}</div>
       </div>

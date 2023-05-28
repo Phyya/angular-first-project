@@ -9,4 +9,5 @@ export class CustomInputComponent {
   @Input() label: string = '';
   @Input() value: string = '';
   @Input() placeholder: string = '';
+  @Input() formControlName: string = '';
 }

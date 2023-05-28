@@ -1,6 +1,5 @@
 .user_products_header {
   color: #fff;
-  border: 2px solid yellow;
   padding: 20px;
   height: 200px;
   margin-top: 80px;
@@ -83,5 +82,19 @@ ul {
   .user_products_history {
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .user_products_header_details {
+    width: 80%;
+  }
+  .user_products_header_details img {
+    right: -64px;
+    top: -35px;
+    width: 190px;
+    height: 250px;
+  }
+  .user_products_history {
+    margin-bottom: 39px;
   }
 }

@@ -35,7 +35,7 @@ export class Spend2saveComponent implements OnChanges, OnInit {
 
   @Input() openForm: boolean = false;
   @Output() onClose: EventEmitter<any> = new EventEmitter<any>();
-  // formGroup: FormGroup = {};
+  formGroup: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {}
 
@@ -62,14 +62,20 @@ export class Spend2saveComponent implements OnChanges, OnInit {
     //   email: ['', [Validators.required, Validators.email]],
     //   // ...
     // });
+    this.formGroup = new FormGroup({
+      eventName: new FormControl(null),
+      description: new FormControl(null),
+      mode: new FormControl(null),
+    });
   }
 
   onSubmit() {
-    // const formValues = this.formGroup.value;
+    const formValues = this.formGroup.value;
     // Make your API request using the form values
     // Example:
     // this.yourService.postFormData(formValues).subscribe(response => {
     //   // Handle the response
     // });
+    console.log(formValues, 'formValues');
   }
 }

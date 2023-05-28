@@ -13,3 +13,9 @@
 .balance_greeting {
   font-size: 20px;
 }
+@media screen and (max-width: 768px) {
+  .balance_greeting,
+  h1 {
+    font-size: 16px;
+  }
+}

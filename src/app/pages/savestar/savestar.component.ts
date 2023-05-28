@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { TableColumn } from 'src/app/components/table/table.component';
 import { SavingsHistory } from 'src/app/interfaces/savings-history';
@@ -9,6 +10,7 @@ import { UserTargets } from 'src/app/interfaces/user-targets';
   styleUrls: ['./savestar.component.css'],
 })
 export class SavestarComponent {
+  datePipe: DatePipe = new DatePipe('en-US');
   totalSavings: string;
   categoryOpen: number = 0;
   defaultSavings: UserTargets = {
@@ -106,28 +108,28 @@ export class SavestarComponent {
   tableData: SavingsHistory[] = [
     {
       id: 1,
-      date: new Date(),
+      date: this.datePipe.transform(new Date(), 'EEE, dd MMM yyyy hh:mm a'),
       description: 'Spend ‘2’ Save Credited',
       amount: 4000,
       status: 'Successful',
     },
     {
       id: 2,
-      date: new Date(),
+      date: this.datePipe.transform(new Date(), 'EEE, dd MMM yyyy hh:mm a'),
       description: 'Lockit',
       amount: 11000,
       status: 'Unsuccessful',
     },
     {
       id: 3,
-      date: new Date(),
+      date: this.datePipe.transform(new Date(), 'EEE, dd MMM yyyy hh:mm a'),
       description: 'Spend ‘2’ Save Credited',
       amount: 2000,
       status: 'Pending',
     },
     {
       id: 4,
-      date: new Date(),
+      date: this.datePipe.transform(new Date(), 'EEE, dd MMM yyyy hh:mm a'),
       description: 'Spend ‘2’ Save Credited',
       amount: 4000,
       status: 'Successful',

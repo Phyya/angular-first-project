@@ -8,4 +8,11 @@
   background-color: #d9d9d9;
   border-radius: 5px;
   width: 84%;
+  display: flex;
+  position: relative;
+}
+.progress_value {
+  position: absolute;
+  top: -4px;
+  right: -33px;
 }

@@ -8,4 +8,5 @@ export class HeaderComponent {
   @Input() title: any;
   doneIcon: string = 'done';
   calendarIcon: string = 'Daterange';
+  currentDate: string = new Date().toLocaleDateString();
 }

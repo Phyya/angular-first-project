@@ -10,3 +10,14 @@
     </tr>
   </tbody>
 </table>
+<ul class="mobile_list">
+  <li *ngFor="let item of data" class="mobile_list_item">
+    <div>
+      <p class="list_description">
+        {{ item.description }}
+      </p>
+      <p>{{ item.date }}</p>
+    </div>
+    <p class="list_amount">₦{{ item.amount }}</p>
+  </li>
+</ul>

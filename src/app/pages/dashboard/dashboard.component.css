@@ -177,13 +177,17 @@
   .dashboard_products div a:not(:first-child) {
     display: none;
   }
+
+  .dashboard_right_container {
+    margin-top: -65px;
+  }
 }
 @media screen and (max-width: 460px) {
   .dashboard_products {
     gap: 0.5rem;
   }
   .dashboard_products div {
-    width: 170px;
+    width: 180px;
   }
 }
 @media screen and (max-width: 450px) {
@@ -196,7 +200,7 @@
 }
 @media screen and (max-width: 403px) {
   .dashboard_products div {
-    width: 140px;
+    width: calc(85% / 2);
   }
 }
 @media screen and (max-width: 370px) {
