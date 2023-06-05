@@ -28,3 +28,9 @@ body {
   > label {
   top: 20px;
 }
+.mat-mdc-select-value-text {
+  color: #fff;
+}
+.mat-mdc-option .mdc-list-item__primary-text {
+  margin: auto !important;
+}

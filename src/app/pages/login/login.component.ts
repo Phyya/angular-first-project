@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { users } from 'src/app/shared/data/data';
 import { DataService } from 'src/app/shared/data/data.service';
 
 @Component({
@@ -8,30 +10,52 @@ import { DataService } from 'src/app/shared/data/data.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  username: string;
-  password: string;
+  userEmail: string;
+  loginForm: FormGroup;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private dataService: DataService
   ) {
-    this.username = '';
-    this.password = '';
+    this.userEmail = '';
   }
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
-      this.username = params.get('username') ?? '';
-      this.password = params.get('password') ?? '';
+      this.userEmail = params.get('userEmail') ?? '';
     });
-    if (this.username && this.password) {
-      const user = { username: this.username };
+
+    if (this.userEmail) {
+      const user = users.find(
+        (user) => user.email.toLowerCase() == this.userEmail.toLowerCase()
+      );
+      console.log(this.userEmail, 'from angular login');
       this.dataService.setUserData(user);
+      localStorage.setItem('opti-user-detail', JSON.stringify(user));
       this.router.navigate(['/home']);
     }
+    this.loginForm = new FormGroup({
+      emailphone: new FormControl(null, Validators.required),
+      password: new FormControl(null, Validators.required),
+      rememberMe: new FormControl(false),
+    });
   }
 
   login() {
     this.router.navigate(['/home']);
+  }
+  onSubmit() {
+    const formValues = this.loginForm.value;
+    console.log(formValues, 'formValues');
+  }
+
+  toggleRadio(): void {
+    const myRadioControl = this.loginForm.get('rememberMe');
+    myRadioControl.setValue(!myRadioControl.value);
+    console.log(myRadioControl.value, 'the radio value');
+  }
+  get isRememberMeChecked(): boolean {
+    return this.loginForm.get('rememberMe').value;
   }
 }

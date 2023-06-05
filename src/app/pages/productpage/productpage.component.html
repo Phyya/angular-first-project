@@ -3,15 +3,23 @@
   <div>
     <div class="user_products_header">
       <div class="user_products_header_details">
-        <p>
-          {{ activePage.title }}
+        <p>{{ activePage.title }} {{ identifier }}</p>
+        <p class="user_products_header_details_description">
+          {{ activePage.description }}
         </p>
-        <p>{{ activePage.description }}</p>
         <img
           [src]="activePage.imagePath"
           [alt]="activePage.title"
           class="user_products_img"
         />
+        <div class="user_products_action_container">
+          <button
+            class="user_products_create"
+            (click)="openModal(activePage.identifier)"
+          >
+            <i class="fa-solid fa-circle-plus"></i>Create New
+          </button>
+        </div>
       </div>
     </div>
     <div class="user_products_history">
@@ -31,29 +39,73 @@
       </ul>
 
       <div class="user_products_history_list" *ngIf="activeTab === 'active'">
-        <div *ngFor="let item of activePage.activeSavings">
-          <p>{{ item.name }}</p>
-          <p>{{ item.amount }}</p>
+        <div
+          *ngFor="let item of activePage.activeSavings"
+          class="user_target_card"
+        >
+          <p class="user_target_item_name">{{ item.targetName }}</p>
+          <p>₦{{ item.balance }}</p>
+          <div class="user_other_details">
+            <div>
+              <p>Interest Earned</p>
+              <p>{{ 0.1 * item.balance }}</p>
+            </div>
+            <div>
+              <p>Due</p>
+              <p>{{ item.endDate | date : "yyyy-MM-dd" }}</p>
+            </div>
+          </div>
+        </div>
+        <div
+          *ngIf="activePage.activeSavings.length === 0"
+          class="user_products_not_available"
+        >
+          <img
+            src="../../../assets/images/not_available.svg"
+            alt="Not available"
+          />
+          <p>No active savings yet.</p>
         </div>
       </div>
       <div class="user_products_history_list" *ngIf="activeTab === 'past'">
-        <div *ngFor="let item of activePage.pastSavings">
-          <p>{{ item.name }}</p>
-          <p>{{ item.amount }}</p>
-        </div>
-      </div>
-      <div class="user_products_action_container">
-        <button
-          class="user_products_create"
-          (click)="openModal(activePage.identifier)"
+        <div
+          *ngFor="let item of activePage.pastSavings"
+          class="user_target_card"
         >
-          <i class="fa-solid fa-circle-plus"></i>Create New
-        </button>
+          <p class="user_target_item_name">{{ item.targetName }}</p>
+          <p>₦{{ item.balance }}</p>
+          <div class="user_other_details">
+            <div>
+              <p>Interest Earned</p>
+              <p>₦{{ 0.1 * item.balance }}</p>
+            </div>
+            <div>
+              <p>Ended</p>
+              <p>{{ item.endDate | date : "yyyy-MM-dd" }}</p>
+            </div>
+          </div>
+        </div>
+        <div
+          *ngIf="activePage.pastSavings.length === 0"
+          class="user_products_not_available"
+        >
+          <img
+            src="../../../assets/images/not_available.svg"
+            alt="Not available"
+          />
+          <p>You do not have any past savings.</p>
+        </div>
       </div>
     </div>
   </div>
   <app-spend2save
     [openForm]="forms['spend2save']"
     (onClose)="toggleModal('spend2save')"
+    (dataUpdated)="updateDataFromLocalStorage()"
   ></app-spend2save>
+  <app-fix-save
+    [openForm]="forms['fixsave']"
+    (onClose)="toggleModal('fixsave')"
+    (dataUpdated)="updateDataFromLocalStorage()"
+  ></app-fix-save>
 </div>

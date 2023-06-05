@@ -1,11 +1,21 @@
 <div class="balance_overview">
   <div>
-    <p class="balance_greeting">Good Morning, Precious!</p>
-    <i class="fa-solid fa-eye-slash"></i>
+    <p class="balance_greeting">Good Morning, {{ userDetails.firstName }}!</p>
+    <i
+      class="fa-solid fa-eye-slash"
+      (click)="toggleBalance()"
+      *ngIf="!showBalance"
+    ></i>
+    <i
+      class="fa-regular fa-eye"
+      (click)="toggleBalance()"
+      *ngIf="showBalance"
+    ></i>
   </div>
   <div>
     <p>Account Balance</p>
-    <h1>₦1,275,006.79</h1>
+    <h1 *ngIf="showBalance">₦{{ userDetails.balance }}</h1>
+    <h1 *ngIf="!showBalance">********</h1>
   </div>
-  <p>2000014567</p>
+  <p>{{ userDetails.accountNumber }}</p>
 </div>

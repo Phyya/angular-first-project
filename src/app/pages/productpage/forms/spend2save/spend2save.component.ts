@@ -8,10 +8,10 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
   FormGroup,
+  FormControl,
   Validators,
+  FormBuilder,
 } from '@angular/forms';
 
 @Component({
@@ -20,22 +20,16 @@ import {
   styleUrls: ['./spend2save.component.css'],
 })
 export class Spend2saveComponent implements OnChanges, OnInit {
-  // isFormVisible: boolean = false;
-  // @Input() openForm: boolean = false;
-  // @Output() onClose: EventEmitter<any> = new EventEmitter<any>();
-
-  // openModal(): void {
-  //   this.isFormVisible = true;
-  // }
-  // closeModal(): void {
-  //   this.openForm = false;
-  // }
-
-  isFormVisible: boolean = false;
-
   @Input() openForm: boolean = false;
   @Output() onClose: EventEmitter<any> = new EventEmitter<any>();
-  formGroup: FormGroup;
+  @Output() dataUpdated: EventEmitter<any> = new EventEmitter<any>();
+  isFormVisible: boolean = false;
+  productForm: FormGroup;
+  durationMode: boolean = false;
+  targetMode: boolean = false;
+  checkboxChecked: boolean = false;
+  loading: boolean = false;
+  success: boolean = false;
 
   constructor(private formBuilder: FormBuilder) {}
 
@@ -55,27 +49,97 @@ export class Spend2saveComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
-    // this.formGroup = this.formBuilder.group({
+    // this.productForm = this.formBuilder.group({
     //   // Define your form controls here
     //   // Example:
     //   name: ['', Validators.required],
     //   email: ['', [Validators.required, Validators.email]],
     //   // ...
     // });
-    this.formGroup = new FormGroup({
-      eventName: new FormControl(null),
-      description: new FormControl(null),
-      mode: new FormControl(null),
+    this.productForm = new FormGroup({
+      targetName: new FormControl(null, Validators.required),
+      description: new FormControl(null, Validators.required),
+      // mode: new FormControl(null, Validators.required),
+      frequency: new FormControl(null, Validators.required),
+      endDate: new FormControl(null, Validators.required),
+      percentage: new FormControl(null, Validators.required),
+      termsAndConditions: new FormControl(false, Validators.required),
+      // targetAmount: new FormControl(
+      //   null,
+      //   this.targetMode && Validators.required
+      // ),
+      // duration: new FormControl(null, this.durationMode && Validators.required),
     });
   }
+  validateForm(): boolean {
+    const formValues = this.productForm.value;
+    const isCheckboxChecked = formValues.termsAndConditions;
 
+    for (const controlName in this.productForm.controls) {
+      if (this.productForm.controls.hasOwnProperty(controlName)) {
+        const control = this.productForm.controls[controlName];
+        if (control.invalid) {
+          return false;
+        }
+      }
+    }
+
+    return isCheckboxChecked;
+  }
+  closeCreatePlan(formValues): void {
+    const user = JSON.parse(localStorage.getItem('opti-user-detail'));
+    const spend2savePlan =
+      user.plans.find((plan) => plan.name == 'spend2save') ?? {};
+    console.log(spend2savePlan, 'the spend2 saveplan');
+    const userPlans = user.plans.filter((plan) => plan.name !== 'spend2save');
+    if (spend2savePlan.active) spend2savePlan.active.push(formValues);
+    else {
+      console.log('no active so pushing');
+      spend2savePlan.name = 'spend2save';
+      spend2savePlan.active = [];
+      spend2savePlan.past = [];
+      spend2savePlan.active.push(formValues);
+    }
+
+    localStorage.setItem(
+      'opti-user-detail',
+      JSON.stringify({
+        ...user,
+        plans: [...userPlans, spend2savePlan],
+      })
+    );
+    this.closeModal();
+    this.dataUpdated.emit();
+  }
   onSubmit() {
-    const formValues = this.formGroup.value;
-    // Make your API request using the form values
-    // Example:
-    // this.yourService.postFormData(formValues).subscribe(response => {
-    //   // Handle the response
-    // });
+    const formValues = {
+      startDate: new Date(),
+      balance: 0,
+      category: 'spend2save',
+      ...this.productForm.value,
+    };
+    this.loading = true;
+    setTimeout(() => {
+      this.success = true;
+      setTimeout(() => {
+        this.closeCreatePlan(formValues);
+      }, 1000);
+    }, 2000);
+
     console.log(formValues, 'formValues');
+  }
+  checkSelectedOption(modeValue: string) {
+    // Perform actions based on the selected mode
+    if (modeValue === 'target') {
+      this.durationMode = false;
+      this.targetMode = true;
+      // Do something for option 1
+    } else if (modeValue === 'duration') {
+      // Do something for option 2
+      this.durationMode = true;
+      this.targetMode = false;
+    }
+
+    console.log(modeValue, 'selected mode');
   }
 }

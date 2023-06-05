@@ -13,6 +13,9 @@
 .balance_greeting {
   font-size: 20px;
 }
+i {
+  cursor: pointer;
+}
 @media screen and (max-width: 768px) {
   .balance_greeting,
   h1 {

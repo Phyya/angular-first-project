@@ -24,7 +24,8 @@
             formControlName="description"
           />
         </div>
-        <!-- <div style="margin-top: 10px">
+
+        <div style="margin-top: 10px">
           <label>Mode</label>
           <mat-form-field>
             <mat-label class="product_label">Select Option</mat-label>
@@ -33,12 +34,12 @@
               [(ngModel)]="productForm.value.mode"
               (ngModelChange)="checkSelectedOption($event)"
             >
-              <mat-option value="target">Target</mat-option>
+              <mat-option value="amount">Amount</mat-option>
               <mat-option value="duration">Duration</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="custom-input target-options" *ngIf="targetMode">
+        <div class="custom-input" *ngIf="!durationMode">
           <label>Target</label>
           <input
             type="number"
@@ -46,18 +47,27 @@
             formControlName="targetAmount"
           />
         </div>
-        <div class="custom-input target-options" *ngIf="durationMode">
-          <label>Duration</label>
-          <input type="date" placeholder="Name" formControlName="duration" />
-        </div> -->
+
         <div class="custom-input">
+          <label>Amount</label>
+          <input
+            type="number"
+            placeholder="Enter amount to be deducted"
+            formControlName="deductionAmount"
+          />
+        </div>
+        <div class="custom-input target-options" *ngIf="durationMode">
+          <label>End Date</label>
+          <input type="date" placeholder="Name" formControlName="endDate" />
+        </div>
+        <!-- <div class="custom-input">
           <label>Percentage</label>
           <input
             type="number"
             placeholder="Enter percentage of spending amount %"
             formControlName="percentage"
           />
-        </div>
+        </div> -->
       </div>
       <div>
         <div class="product_frequency">
@@ -74,17 +84,13 @@
             </mat-select>
           </mat-form-field>
         </div>
-
-        <div class="custom-input target-options">
-          <label>End Date</label>
-          <input type="date" placeholder="Name" formControlName="endDate" />
-        </div>
       </div>
     </div>
     <div
       mat-dialog-actions
       style="display: flex; justify-content: end; flex-direction: column"
       class="product_btn_container"
+      *ngIf="!calculationMode"
     >
       <div style="display: flex; align-items: center; margin: 10px 0">
         <input type="checkbox" formControlName="termsAndConditions" />
@@ -102,6 +108,33 @@
       >
         Submit <i class="fa-solid fa-spinner spinner" *ngIf="loading"></i>
       </button>
+    </div>
+    <!-- [disabled]="!validateForm()" -->
+    <div *ngIf="calculationMode">
+      <p *ngIf="calculatedDate">
+        <span class="important_note">*</span>
+        By saving {{ productForm.value.deductionAmount }}
+        {{ productForm.value.frequency }}, you will achieve your savings goal by
+        {{ calculatedDate }}
+      </p>
+      <p *ngIf="calculatedAmount">
+        <span class="important_note">*</span>
+        By saving {{ productForm.value.deductionAmount }}
+        {{ productForm.value.frequency }}, you will have saved ₦{{
+          calculatedAmount
+        }}
+        by {{ productForm.value.endDate }}
+      </p>
+      <p class="product_errorText" *ngIf="errorText">{{ errorText }}</p>
+      <div class="product_calc_btn_container">
+        <button mat-raised-button class="product_btn" (click)="calculatPlan()">
+          Calculate Plan
+          <i class="fa-solid fa-spinner spinner" *ngIf="loading"></i>
+        </button>
+        <button mat-raised-button class="product_btn" (click)="proceed()">
+          Proceed
+        </button>
+      </div>
     </div>
   </form>
 </app-modal>

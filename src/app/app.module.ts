@@ -23,6 +23,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { CustomInputComponent } from './components/custom-input/custom-input.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { Spend2saveComponent } from './pages/productpage/forms/spend2save/spend2save.component';
+import { FixSaveComponent } from './pages/productpage/forms/fix-save/fix-save.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { Spend2saveComponent } from './pages/productpage/forms/spend2save/spend2
     CustomInputComponent,
     DropdownComponent,
     Spend2saveComponent,
+    FixSaveComponent,
   ],
   imports: [
     BrowserModule,

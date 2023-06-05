@@ -1,10 +1,16 @@
 <div class="modal" (click)="closeModal()">
   <div
     class="modal-content"
-    [style.background-color]="backgroundColor"
+    [style.backgroundColor]="backgroundColor"
     [style.color]="color"
     (click)="preventClose($event)"
   >
+    <i
+      *ngIf="showClose"
+      class="fa-solid fa-xmark cancel_btn"
+      (click)="closeModal()"
+      [style.color]="color"
+    ></i>
     <ng-content></ng-content>
   </div>
 </div>

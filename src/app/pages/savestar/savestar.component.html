@@ -12,15 +12,24 @@
       class="user_target_box"
       (click)="openModal(item.id)"
     >
-      <p>{{ item.name }}</p>
-      <p>₦{{ item.amount }}</p>
+      <p class="user_target_item_name">{{ item.targetName }}</p>
+      <p>₦{{ item.balance }}</p>
+
       <div class="user_progress">
-        <div class="user_progress_bar">
+        <div
+          class="user_progress_bar"
+          *ngIf="!isValueNaN(calculateProgress(item))"
+        >
           <app-bar [value]="calculateProgress(item)"></app-bar>
         </div>
         <div class="user_target_category">{{ item.category }}</div>
       </div>
     </div>
+    <div class="user_products_not_available" *ngIf="userTargets.length === 0">
+      <img src="../../../assets/images/not_available.svg" alt="Not available" />
+      <p>No saving plans yet.</p>
+    </div>
+
     <app-modal
       *ngIf="isModalVisible"
       (onClose)="closeModal()"
@@ -29,21 +38,23 @@
     >
       <div class="user_active_summary_header">
         <div>
-          <p>{{ activeSavings.name }}</p>
-          <p class="user_active_amount">₦{{ activeSavings.amount }}</p>
-        </div>
-        <div class="user_target_category_active">
-          {{ activeSavings.category }}
+          <p>
+            {{ activeSavings.targetName }}
+            <span class="user_target_category_active">
+              {{ activeSavings.category }}
+            </span>
+          </p>
+          <p class="user_active_amount">₦{{ activeSavings.balance }}</p>
         </div>
       </div>
       <div class="user_active_summary_header">
         <div>
-          <p>Interest Payout</p>
-          <p>₦6,300.00</p>
+          <p>Interest Earned</p>
+          <p>₦{{ 0.1 * activeSavings.balance }}</p>
         </div>
         <div>
-          <p>Interest Earned</p>
-          <p>₦6,300.00</p>
+          <p>Due Date</p>
+          <p>{{ activeSavings.endDate | date : "yyyy-MM-dd" }}</p>
         </div>
       </div>
       <div class="user_active_recent">

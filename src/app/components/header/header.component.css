@@ -13,6 +13,7 @@
 }
 h1 {
   margin: 0;
+  white-space: nowrap;
 }
 .header_header_title {
   font-weight: 600;

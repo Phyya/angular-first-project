@@ -1,101 +1,114 @@
 import { DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TableColumn } from 'src/app/components/table/table.component';
 import { SavingsHistory } from 'src/app/interfaces/savings-history';
 import { UserTargets } from 'src/app/interfaces/user-targets';
+import { IPlan } from 'src/app/shared/data/data';
 
 @Component({
   selector: 'app-savestar',
   templateUrl: './savestar.component.html',
   styleUrls: ['./savestar.component.css'],
 })
-export class SavestarComponent {
+export class SavestarComponent implements OnInit {
   datePipe: DatePipe = new DatePipe('en-US');
+  user = JSON.parse(localStorage.getItem('opti-user-detail'));
   totalSavings: string;
   categoryOpen: number = 0;
-  defaultSavings: UserTargets = {
+  defaultSavings: IPlan = {
+    // id: 0,
+    // name: "Ope's Birthday",
+    // category: 'LockIt',
+    // amount: 2000,
+    // target_amount: 50000,
+    // modalOpen: false,
+
     id: 0,
-    name: "Ope's Birthday",
-    category: 'LockIt',
-    amount: 2000,
-    target_amount: 50000,
-    modalOpen: false,
+    targetName: "Ope's Birthday",
+    balance: 50000,
+    description: 'Just a description',
+    frequency: 'Weekly',
+    endDate: '5/07/2023',
+    percentage: 20,
+    category: 'spend2save',
   };
-  activeSavings: UserTargets;
-  userTargets: UserTargets[] = [
-    {
-      id: 1,
-      name: "Ope's Birthday",
-      category: 'LockIt',
-      amount: 2000,
-      target_amount: 50000,
-      modalOpen: false,
-    },
-    {
-      id: 2,
-      name: "Ope's Birthday",
-      category: 'LockIt',
-      amount: 90000,
-      target_amount: 100000,
-      modalOpen: false,
-    },
-    {
-      id: 3,
-      name: "Ope's Birthday",
-      category: 'LockIt',
-      amount: 75000,
-      target_amount: 100000,
-      modalOpen: false,
-    },
-    {
-      id: 4,
-      name: "Ope's Birthday",
-      category: 'LockIt',
-      amount: 3000,
-      target_amount: 100000,
-      modalOpen: false,
-    },
-    {
-      id: 5,
-      name: "Ope's Birthday",
-      category: 'LockIt',
-      amount: 2000,
-      target_amount: 100000,
-      modalOpen: false,
-    },
-    {
-      id: 6,
-      name: "Ope's Birthday",
-      category: 'LockIt',
-      amount: 2000,
-      target_amount: 100000,
-      modalOpen: false,
-    },
-    {
-      id: 7,
-      name: "Ope's Birthday",
-      category: 'LockIt',
-      amount: 2000,
-      target_amount: 100000,
-      modalOpen: false,
-    },
-    {
-      id: 8,
-      name: "Ope's Birthday",
-      category: 'LockIt',
-      amount: 2000,
-      target_amount: 100000,
-      modalOpen: false,
-    },
-    {
-      id: 9,
-      name: "Ope's Birthday",
-      category: 'LockIt',
-      amount: 2000,
-      target_amount: 100000,
-      modalOpen: false,
-    },
-  ];
+  activeSavings: IPlan;
+  userTargets: IPlan[] = [];
+  // userTargets: UserTargets[] =
+  //  [
+  //   {
+  //     id: 1,
+  //     name: "Ope's Birthday",
+  //     category: 'LockIt',
+  //     amount: 2000,
+  //     target_amount: 50000,
+  //     modalOpen: false,
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Ope's Birthday",
+  //     category: 'LockIt',
+  //     amount: 90000,
+  //     target_amount: 100000,
+  //     modalOpen: false,
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Ope's Birthday",
+  //     category: 'LockIt',
+  //     amount: 75000,
+  //     target_amount: 100000,
+  //     modalOpen: false,
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Ope's Birthday",
+  //     category: 'LockIt',
+  //     amount: 3000,
+  //     target_amount: 100000,
+  //     modalOpen: false,
+  //   },
+  //   {
+  //     id: 5,
+  //     name: "Ope's Birthday",
+  //     category: 'LockIt',
+  //     amount: 2000,
+  //     target_amount: 100000,
+  //     modalOpen: false,
+  //   },
+  //   {
+  //     id: 6,
+  //     name: "Ope's Birthday",
+  //     category: 'LockIt',
+  //     amount: 2000,
+  //     target_amount: 100000,
+  //     modalOpen: false,
+  //   },
+  //   {
+  //     id: 7,
+  //     name: "Ope's Birthday",
+  //     category: 'LockIt',
+  //     amount: 2000,
+  //     target_amount: 100000,
+  //     modalOpen: false,
+  //   },
+  //   {
+  //     id: 8,
+  //     name: "Ope's Birthday",
+  //     category: 'LockIt',
+  //     amount: 2000,
+  //     target_amount: 100000,
+  //     modalOpen: false,
+  //   },
+  //   {
+  //     id: 9,
+  //     name: "Ope's Birthday",
+  //     category: 'LockIt',
+  //     amount: 2000,
+  //     target_amount: 100000,
+  //     modalOpen: false,
+  //   },
+  // ];
 
   tableColumns: TableColumn[] = [
     { header: 'S/N', field: 'id' },
@@ -141,8 +154,19 @@ export class SavestarComponent {
     this.totalSavings = '₦638,680.00';
     this.activeSavings = this.defaultSavings;
   }
-  calculateProgress(target: UserTargets): number {
-    return (target.amount / target.target_amount) * 100;
+  ngOnInit(): void {
+    let plans = [];
+    this.user.plans.forEach((planType) => {
+      plans.push(...planType.active);
+    });
+    console.log(plans, 'the plans');
+    this.userTargets = plans;
+  }
+  isValueNaN(value: number): boolean {
+    return isNaN(value);
+  }
+  calculateProgress(target: IPlan): number {
+    return (target.balance / target.target_amount) * 100;
   }
   toggleModal() {
     this.isModalVisible = !this.isModalVisible;

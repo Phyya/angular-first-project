@@ -7,7 +7,7 @@ h3 {
   position: relative;
   height: 100%;
   gap: 2rem;
-  padding-bottom: 100px;
+  padding-bottom: 50px;
 }
 .product_form_container * {
   color: #fff;
@@ -49,17 +49,29 @@ input::placeholder {
   color: white;
   opacity: 0.5;
 }
-.target-options {
-  margin-top: -10px;
-}
+
 p {
   margin: 0;
 }
 .spinner {
   animation: spin 1s linear infinite;
 }
-.errorText {
+.important_note,
+.product_errorText {
   color: red;
+}
+.product_errorText {
+  color: red;
+  margin: 10px 0;
+  font-weight: bold;
+}
+.product_calc_btn_container {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.product_calc_btn_container button {
+  width: 50%;
 }
 @keyframes spin {
   0% {

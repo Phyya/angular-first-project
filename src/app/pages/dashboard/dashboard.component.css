@@ -163,6 +163,11 @@
     width: 45%;
   }
 }
+@media screen and (max-width: 875px) {
+  .dashboard_products div {
+    width: 42%;
+  }
+}
 @media screen and (max-width: 845px) {
   .dashboard_products div {
     width: 43%;

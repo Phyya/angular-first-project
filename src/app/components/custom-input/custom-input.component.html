@@ -1,9 +1,9 @@
 <div class="custom-input">
   <label>{{ label }}</label>
   <input
-    formControlName="formControlName"
-    type="text"
-    [(ngModel)]="value"
+    [type]="type"
     [placeholder]="placeholder"
+    [(ngModel)]="value"
+    (input)="onInputChange()"
   />
 </div>
