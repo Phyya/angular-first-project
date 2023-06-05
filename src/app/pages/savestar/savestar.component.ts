@@ -118,40 +118,41 @@ export class SavestarComponent implements OnInit {
     { header: 'Status', field: 'status' },
   ];
 
-  tableData: SavingsHistory[] = [
-    {
-      id: 1,
-      date: this.datePipe.transform(new Date(), 'EEE, dd MMM yyyy hh:mm a'),
-      description: 'Spend ‘2’ Save Credited',
-      amount: 4000,
-      status: 'Successful',
-    },
-    {
-      id: 2,
-      date: this.datePipe.transform(new Date(), 'EEE, dd MMM yyyy hh:mm a'),
-      description: 'Lockit',
-      amount: 11000,
-      status: 'Unsuccessful',
-    },
-    {
-      id: 3,
-      date: this.datePipe.transform(new Date(), 'EEE, dd MMM yyyy hh:mm a'),
-      description: 'Spend ‘2’ Save Credited',
-      amount: 2000,
-      status: 'Pending',
-    },
-    {
-      id: 4,
-      date: this.datePipe.transform(new Date(), 'EEE, dd MMM yyyy hh:mm a'),
-      description: 'Spend ‘2’ Save Credited',
-      amount: 4000,
-      status: 'Successful',
-    },
-  ];
+  // tableData: SavingsHistory[] = [
+  //   {
+  //     id: 1,
+  //     date: this.datePipe.transform(new Date(), 'EEE, dd MMM yyyy hh:mm a'),
+  //     description: 'Spend ‘2’ Save Credited',
+  //     amount: 4000,
+  //     status: 'Successful',
+  //   },
+  //   {
+  //     id: 2,
+  //     date: this.datePipe.transform(new Date(), 'EEE, dd MMM yyyy hh:mm a'),
+  //     description: 'Lockit',
+  //     amount: 11000,
+  //     status: 'Unsuccessful',
+  //   },
+  //   {
+  //     id: 3,
+  //     date: this.datePipe.transform(new Date(), 'EEE, dd MMM yyyy hh:mm a'),
+  //     description: 'Spend ‘2’ Save Credited',
+  //     amount: 2000,
+  //     status: 'Pending',
+  //   },
+  //   {
+  //     id: 4,
+  //     date: this.datePipe.transform(new Date(), 'EEE, dd MMM yyyy hh:mm a'),
+  //     description: 'Spend ‘2’ Save Credited',
+  //     amount: 4000,
+  //     status: 'Successful',
+  //   },
+  // ];
+  tableData = this.user.history;
   isModalVisible: boolean = false;
 
   constructor() {
-    this.totalSavings = '₦638,680.00';
+    this.totalSavings = this.user.totalSavingsBalance;
     this.activeSavings = this.defaultSavings;
   }
   ngOnInit(): void {

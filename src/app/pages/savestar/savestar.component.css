@@ -21,6 +21,7 @@
   border-radius: 15px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  height: 100px;
 }
 .user_target_container > div:hover {
   background-color: #fff !important;

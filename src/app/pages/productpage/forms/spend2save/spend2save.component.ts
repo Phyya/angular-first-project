@@ -105,6 +105,13 @@ export class Spend2saveComponent implements OnChanges, OnInit {
       'opti-user-detail',
       JSON.stringify({
         ...user,
+        history: [
+          {
+            description: 'Spend2Save Plan Created',
+            date: new Date(),
+          },
+          ...user.history,
+        ],
         plans: [...userPlans, spend2savePlan],
       })
     );

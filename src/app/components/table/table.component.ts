@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 export interface TableColumn {
   header: string;
@@ -16,4 +17,5 @@ export interface TableColumn {
 export class TableComponent {
   @Input() columns: TableColumn[] = [];
   @Input() data: any[] = [];
+  datePipe: DatePipe = new DatePipe('en-US');
 }

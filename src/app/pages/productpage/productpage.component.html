@@ -1,12 +1,14 @@
 <div>
   <app-header [title]="activePage.title"></app-header>
-  <div>
+  <div class="user_products_container">
     <div class="user_products_header">
       <div class="user_products_header_details">
-        <p>{{ activePage.title }} {{ identifier }}</p>
-        <p class="user_products_header_details_description">
-          {{ activePage.description }}
-        </p>
+        <div style="margin-bottom: 50px">
+          <p>{{ activePage.title }}</p>
+          <p class="user_products_header_details_description">
+            {{ activePage.description }}
+          </p>
+        </div>
         <img
           [src]="activePage.imagePath"
           [alt]="activePage.title"

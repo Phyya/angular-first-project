@@ -16,8 +16,8 @@
       <p class="list_description">
         {{ item.description }}
       </p>
-      <p>{{ item.date }}</p>
+      <p>{{ datePipe.transform(item.date, "yyyy-MM-dd HH:mm:ss") }}</p>
     </div>
-    <p class="list_amount">₦{{ item.amount }}</p>
+    <p class="list_amount" *ngIf="item.amount">₦{{ item.amount }}</p>
   </li>
 </ul>

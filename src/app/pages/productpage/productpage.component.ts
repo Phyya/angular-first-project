@@ -61,13 +61,15 @@ export class ProductpageComponent implements OnInit {
     {
       identifier: 'percentwise',
       title: 'PercentWise',
-      description: 'lorem ipsum dolor sit amet, consectetur adipis',
+      description:
+        'Introducing the game-changing strategy to boost your savings: Set aside a percentage of your income every day, every week, or every month!',
       imagePath: '../../../assets/images/percentage.svg',
     },
     {
       identifier: 'cashback',
       title: 'CashBack Loan',
-      description: 'lorem ipsum dolor sit amet, consectetur adipis',
+      description:
+        'Looking for a loan that not only provides financial support but also rewards you? Your search ends here! Introducing our revolutionary Cashback Loan, designed to give you the best of both worlds',
       imagePath: '../../../assets/images/cashback.svg',
     },
   ];

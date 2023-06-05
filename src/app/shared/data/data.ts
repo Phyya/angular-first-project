@@ -35,6 +35,8 @@ export const users = [
     lastName: 'Sanusi',
     accountNumber: 2000076874,
     balance: 5000500,
+    totalSavingsBalance: 0,
+    history: [],
     bankAccountID: '93a8c70f-165b-4363-c5d5-08db650dbebc',
     savingsAccountId: 'd6388edf-4ba0-4876-b988-08db650dbeca',
     plans: [],
@@ -46,6 +48,8 @@ export const users = [
     lastName: 'Erumi',
     accountNumber: 2000071111,
     balance: 6753800,
+    totalSavingsBalance: 0,
+    history: [],
     plans: [],
   },
   {
@@ -55,6 +59,8 @@ export const users = [
     lastName: 'Bankole',
     accountNumber: 2000072323,
     balance: 1067200,
+    totalSavingsBalance: 0,
+    history: [],
     plans: [],
   },
   {
@@ -64,6 +70,8 @@ export const users = [
     lastName: 'Emmanuel',
     accountNumber: 2000074523,
     balance: 4325500,
+    totalSavingsBalance: 0,
+    history: [],
     plans: [],
   },
   {
@@ -73,6 +81,8 @@ export const users = [
     lastName: 'Ogbenjuwa',
     accountNumber: 2000079800,
     balance: 4500000,
+    totalSavingsBalance: 0,
+    history: [],
     plans: [],
   },
 ];

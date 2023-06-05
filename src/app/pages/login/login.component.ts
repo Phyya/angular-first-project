@@ -30,9 +30,9 @@ export class LoginComponent implements OnInit {
       const user = users.find(
         (user) => user.email.toLowerCase() == this.userEmail.toLowerCase()
       );
-      console.log(this.userEmail, 'from angular login');
       this.dataService.setUserData(user);
       localStorage.setItem('opti-user-detail', JSON.stringify(user));
+      console.log(this.userEmail, 'from angular login');
       this.router.navigate(['/home']);
     }
     this.loginForm = new FormGroup({
@@ -43,6 +43,14 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    console.log(this.loginForm.value, 'the values');
+    const user = users.find(
+      (user) =>
+        user.email.toLowerCase() ==
+        this.loginForm.value.emailphone.toLowerCase()
+    );
+    this.dataService.setUserData(user);
+    localStorage.setItem('opti-user-detail', JSON.stringify(user));
     this.router.navigate(['/home']);
   }
   onSubmit() {

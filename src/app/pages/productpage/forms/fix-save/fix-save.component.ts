@@ -105,6 +105,7 @@ export class FixSaveComponent implements OnChanges, OnInit {
       fixsavePlan.name = 'fixsave';
       fixsavePlan.active = [];
       fixsavePlan.past = [];
+
       fixsavePlan.active.push(formValues);
     }
 
@@ -113,6 +114,20 @@ export class FixSaveComponent implements OnChanges, OnInit {
       JSON.stringify({
         ...user,
         balance: user.balance - formValues.deductionAmount,
+        totalSavingsBalance:
+          user.totalSavingsBalance + formValues.deductionAmount,
+        history: [
+          {
+            description: 'FixSave Plan Created',
+            date: new Date(),
+          },
+          {
+            description: 'FixSave Plan Credited',
+            amount: formValues.deductionAmount,
+            date: new Date(),
+          },
+          ...user.history,
+        ],
         plans: [...userPlans, fixsavePlan],
       })
     );
@@ -122,7 +137,8 @@ export class FixSaveComponent implements OnChanges, OnInit {
   onSubmit() {
     const formValues = {
       startDate: new Date(),
-      balance: 0,
+      balance: this.productForm.value.deductionAmount,
+      target_amount: this.productForm.value.targetAmount ?? null,
       category: 'fixSave',
       ...this.productForm.value,
     };
