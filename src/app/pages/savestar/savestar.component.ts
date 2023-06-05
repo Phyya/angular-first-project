@@ -162,6 +162,7 @@ export class SavestarComponent implements OnInit {
     });
     console.log(plans, 'the plans');
     this.userTargets = plans;
+    console.log(this.tableData, 'the table data');
   }
   isValueNaN(value: number): boolean {
     return isNaN(value);

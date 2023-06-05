@@ -131,7 +131,12 @@
           Calculate Plan
           <i class="fa-solid fa-spinner spinner" *ngIf="loading"></i>
         </button>
-        <button mat-raised-button class="product_btn" (click)="proceed()">
+        <button
+          mat-raised-button
+          class="product_btn"
+          (click)="proceed()"
+          *ngIf="calculatedDate || productForm.value.endDate"
+        >
           Proceed
         </button>
       </div>

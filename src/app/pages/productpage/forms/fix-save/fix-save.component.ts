@@ -32,6 +32,7 @@ export class FixSaveComponent implements OnChanges, OnInit {
   success: boolean = false;
   calculationMode: boolean = true;
   calculatedDate: string = '';
+  endDate: string = '';
   calculatedAmount: string = '';
   errorText: string = '';
 
@@ -141,7 +142,10 @@ export class FixSaveComponent implements OnChanges, OnInit {
       target_amount: this.productForm.value.targetAmount ?? null,
       category: 'fixSave',
       ...this.productForm.value,
+      endDate: this.endDate ? this.endDate : this.productForm.value.endDate,
     };
+    console.log(this.calculatedDate, 'calc date');
+    console.log(this.productForm.value.endDate, 'form end date');
     this.loading = true;
     setTimeout(() => {
       this.success = true;
@@ -194,6 +198,7 @@ export class FixSaveComponent implements OnChanges, OnInit {
         futureDate.setMonth(today.getMonth() + calculatedPeriod);
       }
       this.calculatedDate = futureDate.toLocaleDateString();
+      this.endDate = futureDate.toISOString();
     }
     let targetToSave;
     if (this.durationMode) {
