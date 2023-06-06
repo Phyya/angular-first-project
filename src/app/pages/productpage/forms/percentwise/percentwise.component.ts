@@ -14,6 +14,8 @@ import {
   FormBuilder,
 } from '@angular/forms';
 import { Location } from '@angular/common';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-percentwise',
   templateUrl: './percentwise.component.html',
@@ -34,7 +36,11 @@ export class PercentwiseComponent implements OnChanges, OnInit {
   errorText: string = '';
   user = JSON.parse(localStorage.getItem('opti-user-detail'));
 
-  constructor(private formBuilder: FormBuilder, private location: Location) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private location: Location,
+    private router: Router
+  ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['openForm'] && changes['openForm'].currentValue) {
@@ -91,10 +97,11 @@ export class PercentwiseComponent implements OnChanges, OnInit {
     return isCheckboxChecked;
   }
   refreshPage() {
-    this.location.go(this.location.path());
-    window.location.reload();
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
   }
-
   closeCreatePlan(formValues): void {
     const percentPlan =
       this.user.plans.find((plan) => plan.name == 'percentwise') ?? {};

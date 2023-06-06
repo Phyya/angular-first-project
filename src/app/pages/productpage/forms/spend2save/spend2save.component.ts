@@ -14,6 +14,9 @@ import {
   FormBuilder,
 } from '@angular/forms';
 import { Location } from '@angular/common';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
+
 @Component({
   selector: 'app-spend2save',
   templateUrl: './spend2save.component.html',
@@ -31,7 +34,11 @@ export class Spend2saveComponent implements OnChanges, OnInit {
   loading: boolean = false;
   success: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private location: Location) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private location: Location,
+    private router: Router
+  ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['openForm'] && changes['openForm'].currentValue) {
@@ -74,8 +81,10 @@ export class Spend2saveComponent implements OnChanges, OnInit {
     return isCheckboxChecked;
   }
   refreshPage() {
-    this.location.go(this.location.path());
-    window.location.reload();
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
   }
   closeCreatePlan(formValues): void {
     const user = JSON.parse(localStorage.getItem('opti-user-detail'));

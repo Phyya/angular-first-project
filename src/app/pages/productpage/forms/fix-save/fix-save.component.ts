@@ -7,6 +7,8 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import {
   FormGroup,
   FormControl,
@@ -36,7 +38,11 @@ export class FixSaveComponent implements OnChanges, OnInit {
   calculatedAmount: string = '';
   errorText: string = '';
 
-  constructor(private formBuilder: FormBuilder, private location: Location) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private location: Location,
+    private router: Router
+  ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['openForm'] && changes['openForm'].currentValue) {
@@ -88,9 +94,12 @@ export class FixSaveComponent implements OnChanges, OnInit {
 
     return isCheckboxChecked;
   }
+
   refreshPage() {
-    this.location.go(this.location.path());
-    window.location.reload();
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
   }
   closeCreatePlan(formValues): void {
     const user = JSON.parse(localStorage.getItem('opti-user-detail'));

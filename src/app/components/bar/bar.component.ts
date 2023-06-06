@@ -7,4 +7,9 @@ import { Component, Input } from '@angular/core';
 })
 export class BarComponent {
   @Input() value: number = 20;
+  getValue(): number {
+    return Number.isInteger(this.value)
+      ? Number(this.value)
+      : Number(this.value.toFixed(2));
+  }
 }

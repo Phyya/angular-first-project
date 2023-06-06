@@ -1,4 +1,4 @@
-<nav class="bottom-navbar">
+<nav class="bottom-navbar" (click)="getBalance()">
   <a routerLink="/home" routerLinkActive="active">
     <i class="fa-solid fa-house-chimney"></i
   ></a>
@@ -13,7 +13,10 @@
   <a routerLink="/loans/cashback" routerLinkActive="active">
     <i class="fa-sharp fa-solid fa-coins"></i
   ></a>
-  <a routerLink="/profile" routerLinkActive="active">
-    <i class="fa-solid fa-user"></i
-  ></a>
+  <a [href]="url" routerLinkActive="active">
+    <!-- <i class="fa-solid fa-user"></i
+  > -->
+
+    <img src="../../../assets/images/updatedLogo.svg" class="navbar_logo" />
+  </a>
 </nav>
