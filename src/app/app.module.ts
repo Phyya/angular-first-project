@@ -25,6 +25,7 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { Spend2saveComponent } from './pages/productpage/forms/spend2save/spend2save.component';
 import { FixSaveComponent } from './pages/productpage/forms/fix-save/fix-save.component';
 import { PercentwiseComponent } from './pages/productpage/forms/percentwise/percentwise.component';
+import { LandingpageComponent } from './pages/landingpage/landingpage.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { PercentwiseComponent } from './pages/productpage/forms/percentwise/perc
     Spend2saveComponent,
     FixSaveComponent,
     PercentwiseComponent,
+    LandingpageComponent,
   ],
   imports: [
     BrowserModule,

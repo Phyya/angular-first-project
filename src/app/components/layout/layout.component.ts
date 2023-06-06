@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class LayoutComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router) {}
   isMobile = false;
+  user = localStorage.getItem('opti-user-detail');
 
   @HostListener('window:resize', [])
   onResize() {
@@ -17,6 +18,8 @@ export class LayoutComponent implements OnInit {
 
   ngOnInit() {
     this.checkScreenWidth();
+    if (!this.user) this.router.navigate(['/about']);
+    else this.router.navigate(['/home']);
   }
 
   checkScreenWidth() {

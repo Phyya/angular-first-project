@@ -69,7 +69,7 @@ export class ProductpageComponent implements OnInit {
       identifier: 'cashback',
       title: 'CashBack Loan',
       description:
-        'Looking for a loan that not only provides financial support but also rewards you? Your search ends here! Introducing our revolutionary Cashback Loan, designed to give you the best of both worlds',
+        'Introducing our revolutionary Cashback Loan, designed to give you the best of both worlds',
       imagePath: '../../../assets/images/cashback.svg',
     },
   ];
