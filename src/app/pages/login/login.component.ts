@@ -44,15 +44,14 @@ export class LoginComponent implements OnInit {
 
   login() {
     console.log(this.loginForm.value, 'the values');
-    let user;
-    let getUser = localStorage.getItem('opti-user-detail');
-    if (!getUser) {
-      user = users.find(
-        (user) =>
-          user.email.toLowerCase() ==
-          this.loginForm.value.emailphone.toLowerCase()
-      );
-    } else user = getUser;
+    let user = localStorage.getItem('opti-user-detail')
+      ? JSON.parse(localStorage.getItem('opti-user-detail'))
+      : users.find(
+          (user) =>
+            user.email.toLowerCase() ==
+            this.loginForm.value.emailphone.toLowerCase()
+        );
+
     this.dataService.setUserData(user);
     localStorage.setItem('opti-user-detail', JSON.stringify(user));
     this.router.navigate(['/home']);
