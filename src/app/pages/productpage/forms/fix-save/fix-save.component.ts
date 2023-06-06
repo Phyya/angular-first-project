@@ -95,12 +95,6 @@ export class FixSaveComponent implements OnChanges, OnInit {
     return isCheckboxChecked;
   }
 
-  refreshPage() {
-    const currentUrl = this.router.url;
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate([currentUrl]);
-    });
-  }
   closeCreatePlan(formValues): void {
     const user = JSON.parse(localStorage.getItem('opti-user-detail'));
     const fixsavePlan = user.plans.find((plan) => plan.name == 'fixsave') ?? {};
@@ -138,7 +132,6 @@ export class FixSaveComponent implements OnChanges, OnInit {
       })
     );
     this.closeModal();
-    this.refreshPage();
     this.dataUpdated.emit();
   }
   onSubmit() {

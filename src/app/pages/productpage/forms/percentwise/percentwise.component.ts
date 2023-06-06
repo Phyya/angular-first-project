@@ -96,12 +96,7 @@ export class PercentwiseComponent implements OnChanges, OnInit {
 
     return isCheckboxChecked;
   }
-  refreshPage() {
-    const currentUrl = this.router.url;
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate([currentUrl]);
-    });
-  }
+
   closeCreatePlan(formValues): void {
     const percentPlan =
       this.user.plans.find((plan) => plan.name == 'percentwise') ?? {};
@@ -144,7 +139,6 @@ export class PercentwiseComponent implements OnChanges, OnInit {
       })
     );
     this.closeModal();
-    this.refreshPage();
     this.dataUpdated.emit();
   }
   onSubmit() {

@@ -11,7 +11,5 @@ export class NavbarComponent {
     balance: this.user.totalSavingsBalance,
   }).toString();
   url = `https://optiverse-mobile-app.netlify.app/home?${this.queryString}`;
-  getBalance() {
-    console.log(this.user.totalSavingsBalance, 'the balance');
-  }
+  getBalance() {}
 }
