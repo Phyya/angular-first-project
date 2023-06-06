@@ -8,5 +8,15 @@ export class HeaderComponent {
   @Input() title: any;
   doneIcon: string = 'done';
   calendarIcon: string = 'Daterange';
-  currentDate: string = new Date().toLocaleDateString();
+  date = new Date();
+  options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+
+  formattedDate = this.date
+    .toLocaleDateString('en-US', {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    })
+    .replace(/(\d+)(?:st|nd|rd|th)/, '$1<sup>$2</sup>');
 }

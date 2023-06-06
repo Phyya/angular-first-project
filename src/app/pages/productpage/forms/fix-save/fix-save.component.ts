@@ -13,7 +13,7 @@ import {
   Validators,
   FormBuilder,
 } from '@angular/forms';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-fix-save',
   templateUrl: './fix-save.component.html',
@@ -36,7 +36,7 @@ export class FixSaveComponent implements OnChanges, OnInit {
   calculatedAmount: string = '';
   errorText: string = '';
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private location: Location) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['openForm'] && changes['openForm'].currentValue) {
@@ -54,16 +54,9 @@ export class FixSaveComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
-    // this.productForm = this.formBuilder.group({
-    //   // Define your form controls here
-    //   // Example:
-    //   name: ['', Validators.required],
-    //   email: ['', [Validators.required, Validators.email]],
-    //   // ...
-    // });
     this.productForm = new FormGroup({
       targetName: new FormControl(null, Validators.required),
-      description: new FormControl(null, Validators.required),
+      description: new FormControl(null),
       mode: new FormControl(null, Validators.required),
       targetAmount: new FormControl(null),
       frequency: new FormControl(null, Validators.required),
@@ -95,6 +88,10 @@ export class FixSaveComponent implements OnChanges, OnInit {
 
     return isCheckboxChecked;
   }
+  refreshPage() {
+    this.location.go(this.location.path());
+    window.location.reload();
+  }
   closeCreatePlan(formValues): void {
     const user = JSON.parse(localStorage.getItem('opti-user-detail'));
     const fixsavePlan = user.plans.find((plan) => plan.name == 'fixsave') ?? {};
@@ -106,7 +103,6 @@ export class FixSaveComponent implements OnChanges, OnInit {
       fixsavePlan.name = 'fixsave';
       fixsavePlan.active = [];
       fixsavePlan.past = [];
-
       fixsavePlan.active.push(formValues);
     }
 
@@ -119,11 +115,11 @@ export class FixSaveComponent implements OnChanges, OnInit {
           user.totalSavingsBalance + formValues.deductionAmount,
         history: [
           {
-            description: 'FixSave Plan Created',
+            description: `FixSave plan - ${formValues.targetName} created`,
             date: new Date(),
           },
           {
-            description: 'FixSave Plan Credited',
+            description: `FixSave plan - ${formValues.targetName} credited`,
             amount: formValues.deductionAmount,
             date: new Date(),
           },
@@ -133,6 +129,7 @@ export class FixSaveComponent implements OnChanges, OnInit {
       })
     );
     this.closeModal();
+    this.refreshPage();
     this.dataUpdated.emit();
   }
   onSubmit() {

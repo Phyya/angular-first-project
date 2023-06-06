@@ -24,6 +24,7 @@ import { CustomInputComponent } from './components/custom-input/custom-input.com
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { Spend2saveComponent } from './pages/productpage/forms/spend2save/spend2save.component';
 import { FixSaveComponent } from './pages/productpage/forms/fix-save/fix-save.component';
+import { PercentwiseComponent } from './pages/productpage/forms/percentwise/percentwise.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { FixSaveComponent } from './pages/productpage/forms/fix-save/fix-save.co
     DropdownComponent,
     Spend2saveComponent,
     FixSaveComponent,
+    PercentwiseComponent,
   ],
   imports: [
     BrowserModule,

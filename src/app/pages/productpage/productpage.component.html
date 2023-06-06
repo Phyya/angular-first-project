@@ -46,11 +46,11 @@
           class="user_target_card"
         >
           <p class="user_target_item_name">{{ item.targetName }}</p>
-          <p>₦{{ item.balance }}</p>
+          <p>₦{{ item.balance.toLocaleString("en-US") }}</p>
           <div class="user_other_details">
             <div>
-              <p>Interest Earned</p>
-              <p>{{ 0.1 * item.balance }}</p>
+              <p>Interest Earned at 10%</p>
+              <p>₦{{ (0.1 * item.balance).toLocaleString("en-US") }}</p>
             </div>
             <div>
               <p>Due</p>
@@ -75,11 +75,11 @@
           class="user_target_card"
         >
           <p class="user_target_item_name">{{ item.targetName }}</p>
-          <p>₦{{ item.balance }}</p>
+          <p>₦{{ item.balance.toLocaleString("en-US") }}</p>
           <div class="user_other_details">
             <div>
               <p>Interest Earned</p>
-              <p>₦{{ 0.1 * item.balance }}</p>
+              <p>₦{{ 0.1 * item.balance.toLocaleString("en-US") }}</p>
             </div>
             <div>
               <p>Ended</p>
@@ -110,4 +110,9 @@
     (onClose)="toggleModal('fixsave')"
     (dataUpdated)="updateDataFromLocalStorage()"
   ></app-fix-save>
+  <app-percentwise
+    [openForm]="forms['percentwise']"
+    (onClose)="toggleModal('percentwise')"
+    (dataUpdated)="updateDataFromLocalStorage()"
+  ></app-percentwise>
 </div>

@@ -5,8 +5,21 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of data">
-      <td *ngFor="let column of columns">{{ item[column.field] }}</td>
+    <tr *ngFor="let item of data; let i = index">
+      <td *ngFor="let column of columns">
+        <ng-container *ngIf="column.field === 'id'">
+          {{ i + 1 }}
+        </ng-container>
+        <ng-container *ngIf="column.field === 'date'">
+          {{ item[column.field] | date : "MMM. d, yyyy, h:mm a" }}
+        </ng-container>
+        <ng-container *ngIf="column.field !== 'date'">
+          {{ item[column.field] }}
+        </ng-container>
+        <ng-container *ngIf="column.field === 'status'">
+          successful
+        </ng-container>
+      </td>
     </tr>
   </tbody>
 </table>

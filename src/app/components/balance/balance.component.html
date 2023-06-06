@@ -14,7 +14,9 @@
   </div>
   <div>
     <p>Account Balance</p>
-    <h1 *ngIf="showBalance">₦{{ userDetails.balance }}</h1>
+    <h1 *ngIf="showBalance">
+      ₦{{ userDetails.balance.toLocaleString("en-US") }}
+    </h1>
     <h1 *ngIf="!showBalance">********</h1>
   </div>
   <p>{{ userDetails.accountNumber }}</p>

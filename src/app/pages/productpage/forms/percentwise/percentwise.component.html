@@ -1,0 +1,80 @@
+<app-modal
+  *ngIf="openForm"
+  (onClose)="closeModal()"
+  [backgroundColor]="'#003399'"
+  [color]="'#fff'"
+>
+  <form [formGroup]="productForm" class="form-container">
+    <h3>Create your plan</h3>
+    <div class="product_form_container">
+      <div class="product_form_left">
+        <div class="custom-input">
+          <label>Target Name</label>
+          <input
+            type="text"
+            placeholder="Enter plan name"
+            formControlName="targetName"
+          />
+        </div>
+        <div class="custom-input">
+          <label>Description</label>
+          <input
+            type="text"
+            placeholder="Enter brief description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="custom-input">
+          <label>Percentage Amount</label>
+          <input
+            type="number"
+            min="1"
+            max="100"
+            placeholder="Enter percentage of balance to be deducted"
+            formControlName="deductionAmount"
+          />
+        </div>
+        <div class="custom-input target-options">
+          <label>End Date</label>
+          <input type="date" placeholder="Name" formControlName="endDate" />
+        </div>
+      </div>
+      <div>
+        <div class="product_frequency">
+          <label>Frequency</label>
+          <mat-form-field>
+            <mat-label>Select Option</mat-label>
+            <mat-select
+              formControlName="frequency"
+              [(ngModel)]="productForm.value.frequency"
+            >
+              <mat-option value="daily">Daily</mat-option>
+              <mat-option value="weekly">Weekly</mat-option>
+              <mat-option value="monthly">Monthly</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <p class="product_errorText" *ngIf="errorText">{{ errorText }}</p>
+    <div
+      mat-dialog-actions
+      style="display: flex; justify-content: end; flex-direction: column"
+      class="product_btn_container"
+    >
+      <div style="display: flex; align-items: center; margin: 10px 0">
+        <input type="checkbox" formControlName="termsAndConditions" />
+        <p>
+          I hereby agree to the <a href="">terms and conditions</a> of Optimus
+          Savestar.
+        </p>
+      </div>
+
+      <button mat-raised-button class="product_btn" (click)="onSubmit()">
+        Submit <i class="fa-solid fa-spinner spinner" *ngIf="loading"></i>
+      </button>
+    </div>
+    <!-- [disabled]="!validateForm()" -->
+  </form>
+</app-modal>

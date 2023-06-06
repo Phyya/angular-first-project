@@ -2,7 +2,7 @@
 <div class="my_savings_container">
   <div class="total_savings">
     <p>Total Savings</p>
-    <p class="total_savings_actual">₦ {{ totalSavings }}</p>
+    <p class="total_savings_actual">₦ {{ totalSavings.toLocaleString() }}</p>
   </div>
   <div class="user_target_container">
     <div
@@ -11,7 +11,7 @@
       (click)="openModal(item.id)"
     >
       <p class="user_target_item_name">{{ item.targetName }}</p>
-      <p>₦{{ item.balance }}</p>
+      <p>₦{{ item.balance.toLocaleString("en-US") }}</p>
 
       <div class="user_progress">
         <div

@@ -165,8 +165,9 @@ export class SavestarComponent implements OnInit {
     console.log(this.tableData, 'the table data');
   }
   isValueNaN(value: number): boolean {
-    return isNaN(value);
+    return isNaN(value) || !isFinite(value);
   }
+
   calculateProgress(target: IPlan): number {
     return (target.balance / target.target_amount) * 100;
   }

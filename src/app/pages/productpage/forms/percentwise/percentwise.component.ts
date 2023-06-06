@@ -15,21 +15,24 @@ import {
 } from '@angular/forms';
 import { Location } from '@angular/common';
 @Component({
-  selector: 'app-spend2save',
-  templateUrl: './spend2save.component.html',
-  styleUrls: ['./spend2save.component.css'],
+  selector: 'app-percentwise',
+  templateUrl: './percentwise.component.html',
+  styleUrls: ['./percentwise.component.css'],
 })
-export class Spend2saveComponent implements OnChanges, OnInit {
+export class PercentwiseComponent implements OnChanges, OnInit {
   @Input() openForm: boolean = false;
   @Output() onClose: EventEmitter<any> = new EventEmitter<any>();
   @Output() dataUpdated: EventEmitter<any> = new EventEmitter<any>();
   isFormVisible: boolean = false;
   productForm: FormGroup;
   durationMode: boolean = false;
-  targetMode: boolean = false;
+  amountMode: boolean = false;
   checkboxChecked: boolean = false;
   loading: boolean = false;
   success: boolean = false;
+  endDate: string = '';
+  errorText: string = '';
+  user = JSON.parse(localStorage.getItem('opti-user-detail'));
 
   constructor(private formBuilder: FormBuilder, private location: Location) {}
 
@@ -53,14 +56,28 @@ export class Spend2saveComponent implements OnChanges, OnInit {
       targetName: new FormControl(null, Validators.required),
       description: new FormControl(null),
       frequency: new FormControl(null, Validators.required),
-      endDate: new FormControl(null, Validators.required),
-      percentage: new FormControl(null, Validators.required),
       termsAndConditions: new FormControl(false, Validators.required),
+      deductionAmount: new FormControl(0, Validators.required),
+      endDate: new FormControl(null, this.durationMode && Validators.required),
     });
+    this.productForm.valueChanges.subscribe((changes) => {
+      this.errorText = '';
+    });
+  }
+  validatePercentage() {
+    const value = this.productForm.value.deductionAmount;
+    if (value > 100 || value < 1) {
+      this.errorText = 'Please enter a valid percentage';
+      return {
+        invalidPercentage: true,
+      };
+    }
+    return null;
   }
   validateForm(): boolean {
     const formValues = this.productForm.value;
     const isCheckboxChecked = formValues.termsAndConditions;
+    this.validatePercentage();
 
     for (const controlName in this.productForm.controls) {
       if (this.productForm.controls.hasOwnProperty(controlName)) {
@@ -77,33 +94,46 @@ export class Spend2saveComponent implements OnChanges, OnInit {
     this.location.go(this.location.path());
     window.location.reload();
   }
+
   closeCreatePlan(formValues): void {
-    const user = JSON.parse(localStorage.getItem('opti-user-detail'));
-    const spend2savePlan =
-      user.plans.find((plan) => plan.name == 'spend2save') ?? {};
-    console.log(spend2savePlan, 'the spend2 saveplan');
-    const userPlans = user.plans.filter((plan) => plan.name !== 'spend2save');
-    if (spend2savePlan.active) spend2savePlan.active.push(formValues);
+    const percentPlan =
+      this.user.plans.find((plan) => plan.name == 'percentwise') ?? {};
+    const userPlans = this.user.plans.filter(
+      (plan) => plan.name !== 'percentwise'
+    );
+    if (percentPlan.active) percentPlan.active.push(formValues);
     else {
       console.log('no active so pushing');
-      spend2savePlan.name = 'spend2save';
-      spend2savePlan.active = [];
-      spend2savePlan.past = [];
-      spend2savePlan.active.push(formValues);
+      percentPlan.name = 'percentwise';
+      percentPlan.active = [];
+      percentPlan.past = [];
+      percentPlan.active.push(formValues);
     }
 
     localStorage.setItem(
       'opti-user-detail',
       JSON.stringify({
-        ...user,
+        ...this.user,
+        balance:
+          this.user.balance -
+          (this.productForm.value.deductionAmount / 100) * this.user.balance,
+        totalSavingsBalance:
+          this.user.totalSavingsBalance + formValues.deductionAmount,
         history: [
           {
-            description: `Spend2save plan - ${formValues.targetName} created`,
+            description: `PercentWise plan - ${formValues.targetName} created`,
             date: new Date(),
           },
-          ...user.history,
+          {
+            description: `PercentWise plan - ${formValues.targetName} credited`,
+            amount:
+              (this.productForm.value.deductionAmount / 100) *
+              this.user.balance,
+            date: new Date(),
+          },
+          ...this.user.history,
         ],
-        plans: [...userPlans, spend2savePlan],
+        plans: [...userPlans, percentPlan],
       })
     );
     this.closeModal();
@@ -111,12 +141,18 @@ export class Spend2saveComponent implements OnChanges, OnInit {
     this.dataUpdated.emit();
   }
   onSubmit() {
+    console.log('is submitting');
     const formValues = {
       startDate: new Date(),
-      balance: 0,
-      category: 'spend2save',
+      balance:
+        (this.productForm.value.deductionAmount / 100) * this.user.balance,
+      target_amount:
+        (this.productForm.value.deductionAmount / 100) * this.user.balance,
+      category: 'percentwise',
       ...this.productForm.value,
+      endDate: this.endDate ? this.endDate : this.productForm.value.endDate,
     };
+    console.log(this.productForm.value.endDate, 'form end date');
     this.loading = true;
     setTimeout(() => {
       this.success = true;
@@ -128,15 +164,12 @@ export class Spend2saveComponent implements OnChanges, OnInit {
     console.log(formValues, 'formValues');
   }
   checkSelectedOption(modeValue: string) {
-    // Perform actions based on the selected mode
-    if (modeValue === 'target') {
+    if (modeValue === 'amount') {
       this.durationMode = false;
-      this.targetMode = true;
-      // Do something for option 1
+      this.amountMode = true;
     } else if (modeValue === 'duration') {
-      // Do something for option 2
       this.durationMode = true;
-      this.targetMode = false;
+      this.amountMode = false;
     }
 
     console.log(modeValue, 'selected mode');
