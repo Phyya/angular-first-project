@@ -20,8 +20,9 @@ export class LayoutComponent implements OnInit {
     this.checkScreenWidth();
     if (!this.user) this.router.navigate(['/about']);
     else {
-      console.log('got here');
-      this.router.navigate(['/home']);
+      const currentUrl = this.router.url;
+      console.log('Current URL:', currentUrl);
+      this.router.navigate([currentUrl]);
     }
   }
 
